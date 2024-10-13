@@ -29,8 +29,9 @@ boom.Motors.setControlModes(1); % Torque mode.
 
 boom.startRecording(floor(duration * 50)); % To preallocate.
 
-torque1 = 0.1; torque2 = 0; % N*m. Peak torque = 1.7 N*m.
-boom.Motors.setTorques([torque1 torque2]);
+% Torque units = N*m. Peak torque = 1.7 N*m.
+torque_knee = -0.1; torque_hip = 0; % Hip motor.
+boom.Motors.setTorques([torque_knee torque_hip]);
 
 pauseSafe(boom, duration + 1.0); % Pressing Ctrl+C switches to idle mode. Otherwise same as pause. 
 
@@ -51,26 +52,5 @@ leg_data = parseLegData(boom.LegData);
 
 % Encoder values: motor_data.motor_pos(:,motor_num);
 
-figure()
-hold on
-plot(motor_data.time, motor_data.motor_pos(:,1), '-r');
-title("Motor 1 Encoder"); xlabel("Time (s)"); ylabel("Position (rev)")
-grid on
+save('mane_pd_v0_ws.mat')
 
-% figure()
-% hold on
-% plot(motor_data.time, motor_data.motor_pos_cmd(:,1), '--k');
-% plot(motor_data.time, motor_data.motor_pos(:,1), '-r');
-% title("Motor 1 Encoder")
-% xlabel("Time (s)")
-% ylabel("Position (rev)")
-% legend(["Commanded", "Encoder Estimate"])
-% 
-% figure()
-% hold on
-% plot(motor_data.time, motor_data.motor_pos_cmd(:,2), '--k');
-% plot(motor_data.time, motor_data.motor_pos(:,2), '-r');
-% title("Motor 2 Encoder")
-% xlabel("Time (s)")
-% ylabel("Position (rev)")
-% legend(["Commanded", "Encoder Estimate"])
