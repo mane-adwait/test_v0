@@ -1,7 +1,8 @@
 % Knee joint = motor_data.motor_pos(:,1)
 % Hip joint = motor_data.motor_pos(:,2)
 
-load("mane_pd_v0_ws.mat")
+close all; clear all;
+load("mane_pd_v1_trq-sin_ws.mat")
 
 figure()
 
